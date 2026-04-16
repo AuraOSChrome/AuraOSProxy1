@@ -1,4 +1,4 @@
-# Shadow Network V3 A fast tab cloaking with hundreds of games to play and apps
+# Aura OS - A fast and clean proxy with web application access
 ## Features:
 - Advanced Tab Cloaking
 - Advanced About:Blank Cloaking (prevents site from showing on browser history)
@@ -6,10 +6,10 @@
 - Extremely clean UI
 - Fast speeds
 - All kinds of proxys around the world
-- Tons of Apps & Games
-- Best theme backround
+- Tons of Apps & Tools
+- Best theme background
 - Best proxy alive
-- Most useful Methods and Cheats
+- Most useful Methods and Utilities
 - Widgetbot 
 ## Contributors:
 [![Contrib](https://contrib.rocks/image?repo=Shadowproxynetwork/Shadownetwork)](https://github.com/Shadowproxynetwork/Shadownetwork/graphs/contributors)
