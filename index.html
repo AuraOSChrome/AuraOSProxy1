@@ -167,8 +167,8 @@
     <li class="nav-item"><a href="javascript:void(0)">Tabs</a></li>
     <li class="nav-item"><a href="javascript:void(0)">Settings</a></li>
 </ul>
-<form class="searchform" id="searchform">
-  <input id="searchbar" placeholder="Search the web freely">
+<form class="searchform" id="searchform" role="search">
+  <input id="searchbar" type="search" name="q" autocomplete="off" placeholder="Search the web freely" aria-label="Search">
 </form>
 <div id="title"><h1>Chrome Reworked</h1></div>
 <div class="particles" aria-hidden="true">
@@ -251,6 +251,9 @@
     if (searchform) {
       searchform.addEventListener("submit", async (event) => {
         event.preventDefault();
+        const rawQuery = searchbar.value.trim();
+        if (!rawQuery) return;
+
         try {
           if (typeof registerSW === 'function') {
             await registerSW();
@@ -260,11 +263,11 @@
         }
 
         if (typeof search === 'function' && typeof __uv$config !== 'undefined') {
-          const url = search(searchbar.value, "https://www.google.com/search?q=%s");
+          const url = search(rawQuery, "https://www.google.com/search?q=%s");
           window.location.href = __uv$config.prefix + __uv$config.encodeUrl(url);
         } else {
           console.warn("Proxy functionality not available. Opening search in new tab.");
-          const query = encodeURIComponent(searchbar.value);
+          const query = encodeURIComponent(rawQuery);
           window.open(`https://www.google.com/search?q=${query}`, '_blank');
         }
       });

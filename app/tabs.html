@@ -44,23 +44,34 @@ function prependHttps(url) {
 }
 
 const form = document.querySelector('form');
-const input = document.querySelector('input');
+const input = document.querySelector('form input');
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const formValue = document.querySelector('form input').value;
+  const formValue = input.value.trim();
+  if (!formValue) return;
+
   const url = isUrl(formValue)
     ? prependHttps(formValue)
-    : 'https://www.google.com/search?q=' + formValue;
+    : 'https://www.google.com/search?q=' + encodeURIComponent(formValue);
 
   const activeIframe = Array.from(
     document.getElementById('iframe-container').querySelectorAll('iframe')
   ).find((iframe) => iframe.classList.contains('active'));
 
-  activeIframe.src = "/reviews/" + ("encodedUrl", __uv$config.encodeUrl(url));
-  activeIframe.dataset.tabUrl = url;
-  document.querySelector('form input').value = url;
-  console.log(activeIframe.dataset.tabUrl);
+  const encodedUrl =
+    typeof __uv$config === 'object' && typeof __uv$config.encodeUrl === 'function'
+      ? __uv$config.encodeUrl(url)
+      : encodeURIComponent(url);
+
+  if (activeIframe) {
+    activeIframe.src = "/reviews/" + encodedUrl;
+    activeIframe.dataset.tabUrl = url;
+    input.value = url;
+    console.log(activeIframe.dataset.tabUrl);
+  } else {
+    window.location.href = "/reviews/" + encodedUrl;
+  }
 });
     </script>
     <script src="./contact/mathematics.js"></script>
